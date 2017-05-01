@@ -25,17 +25,21 @@ class App extends Component {
 
   }
 
+  setDsRecord(todos){
+    this.todoRecord.set('todos', todos);
+  }
+
   addTodo(val){
     const todo = {text: val, todoId: this.client.getUid()};
     this.state.todos.push(todo);
-    this.todoRecord.set('todos', this.state.todos);
+    this.setDsRecord(this.state.todos);
   }
 
   removeTodo(todoId){
     const remainder = this.state.todos.filter((todo) => {
       if(todo.todoId !== todoId) return todo;
     })
-    this.todoRecord.set('todos', remainder);
+    this.setDsRecord(remainder);
   }
 
   render() {
