@@ -1,7 +1,7 @@
 import createDeepstream from 'deepstream.io-client-js';
 import React, { Component } from 'react';
-import TodoForm from './components/TodoForm';
-import TodoList from './components/TodoList';
+import TodoForm from '../TodoForm/TodoForm';
+import TodoList from '../TodoList/TodoList';
 import './App.css';
 
 class App extends Component {
