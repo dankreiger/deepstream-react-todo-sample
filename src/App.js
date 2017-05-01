@@ -9,23 +9,26 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {todos: []};
-    // connect to deepstream
-    this.ds = createDeepstream('<YOUR API KEY HERE>');
-    // login
-    this.client = this.ds.login();
-    // this.myRecord = this.ds.record.getRecord( 'test/johndoe' );
-    this.todoRecord = this.ds.record.getRecord( 'default/todos' );
+    if(process.env.NODE_ENV!=='test'){
+      // connect to deepstream
+      this.ds = createDeepstream('<YOUR API KEY>');
 
-    this.todoRecord.subscribe(value => {
-      this.setState({todos: value.todos});
-    });
+      // login
+      this.client = this.ds.login();
+      // this.myRecord = this.ds.record.getRecord( 'test/johndoe' );
+      this.todoRecord = this.ds.record.getRecord( 'default/todos' );
+
+      this.todoRecord.subscribe(value => {
+        this.setState({todos: value.todos});
+      });
+    }
+
   }
 
   addTodo(val){
-    const todos = this.state.todos;
     const todo = {text: val, todoId: this.client.getUid()};
-    todos.push(todo);
-    this.todoRecord.set('todos', todos);
+    this.state.todos.push(todo);
+    this.todoRecord.set('todos', this.state.todos);
   }
 
   removeTodo(todoId){
