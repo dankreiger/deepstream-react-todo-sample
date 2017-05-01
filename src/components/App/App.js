@@ -13,7 +13,7 @@ class App extends Component {
       this.ds = createDeepstream('<YOUR API KEY>');
       // login
       this.client = this.ds.login();
-      // this.myRecord = this.ds.record.getRecord( 'test/johndoe' );
+
       this.todoRecord = this.ds.record.getRecord( 'default/todos' );
 
       this.todoRecord.subscribe(value => {
