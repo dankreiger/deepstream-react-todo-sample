@@ -1,8 +1,7 @@
 import createDeepstream from 'deepstream.io-client-js';
 import React, { Component } from 'react';
-import TodoForm from './TodoForm';
-import TodoList from './TodoList';
-import Record from './Record';
+import TodoForm from './components/TodoForm';
+import TodoList from './components/TodoList';
 import './App.css';
 
 class App extends Component {
@@ -12,7 +11,6 @@ class App extends Component {
     if(process.env.NODE_ENV!=='test'){
       // connect to deepstream
       this.ds = createDeepstream('<YOUR API KEY>');
-
       // login
       this.client = this.ds.login();
       // this.myRecord = this.ds.record.getRecord( 'test/johndoe' );
@@ -22,7 +20,6 @@ class App extends Component {
         this.setState({todos: value.todos});
       });
     }
-
   }
 
   setDsRecord(todos){
@@ -50,8 +47,6 @@ class App extends Component {
         </div>
         <TodoForm addTodo={this.addTodo.bind(this)} />
         <TodoList todos={this.state.todos} recordName='todos' ds={this.ds} removeTodo={this.removeTodo.bind(this)} />
-
-        {/* <Record record={this.myRecord} /> */}
       </div>
     );
   }
